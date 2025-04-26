@@ -1,0 +1,136 @@
+[gd_scene load_steps=20 format=3 uid="uid://dypl0ek6dcoyy"]
+
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_player.gd" id="1_0olhx"]
+[ext_resource type="Texture2D" uid="uid://dknghbim7dbgj" path="res://art/player.png" id="1_7tsok"]
+[ext_resource type="PackedScene" uid="uid://cjahsfn5pmg6r" path="res://components/velocity_component.tscn" id="1_pijx0"]
+[ext_resource type="Script" path="res://arcade/scenes/weapons/weapon.gd" id="2_n5kao"]
+[ext_resource type="Texture2D" uid="uid://goocwxrqyjat" path="res://art/staff_walk.png" id="3_g84vb"]
+[ext_resource type="PackedScene" uid="uid://ded344mxfqtf0" path="res://arcade/scenes/ArcadePlayer/arcade_player_fsm.tscn" id="4_76htq"]
+[ext_resource type="Texture2D" uid="uid://bh002ijei3s16" path="res://art/popgun_pixel2-export.png" id="4_ao5ga"]
+[ext_resource type="AudioStream" uid="uid://rv5bmrvdr5kp" path="res://sfx/Popcorn_Shot1.wav" id="5_kwrdw"]
+[ext_resource type="PackedScene" uid="uid://bdas5hugynbdk" path="res://components/health_component.tscn" id="7_87idn"]
+[ext_resource type="PackedScene" uid="uid://2qbb4cq4xvxa" path="res://arcade/scenes/ui/mini_health_bar.tscn" id="8_81h4r"]
+[ext_resource type="PackedScene" uid="uid://dg1k3ywx5fp6u" path="res://components/hit_flash/hit_flash_component.tscn" id="9_cnj2s"]
+[ext_resource type="PackedScene" uid="uid://ctak6l2glhi4w" path="res://components/floating_damage_component.tscn" id="10_vpyfb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sh03"]
+atlas = ExtResource("3_g84vb")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tpko"]
+atlas = ExtResource("3_g84vb")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlnus"]
+atlas = ExtResource("3_g84vb")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kp86"]
+atlas = ExtResource("3_g84vb")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_622gx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sh03")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tpko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlnus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kp86")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_267mj"]
+size = Vector2(14, 7.33333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esmnt"]
+size = Vector2(13.5714, 18.6904)
+
+[node name="ArcadePlayer" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component") groups=["player"]]
+texture_filter = 1
+position = Vector2(0, -2)
+scale = Vector2(1.5, 1.5)
+collision_mask = 68
+script = ExtResource("1_0olhx")
+velocity_component = NodePath("VelocityComponent")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -51.4286)
+ignore_rotation = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-15.7143, -16.4286)
+texture = ExtResource("1_7tsok")
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.454281, 0.454281)
+sprite_frames = SubResource("SpriteFrames_622gx")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10.3333)
+shape = SubResource("RectangleShape2D_267mj")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 9.28571)
+scale = Vector2(1, 0.4)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.357143, 2.79761)
+shape = SubResource("RectangleShape2D_esmnt")
+
+[node name="Weapon" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(9.53674e-07, 0)
+script = ExtResource("2_n5kao")
+fire_sfx = ExtResource("5_kwrdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+z_index = 1
+texture_filter = 1
+scale = Vector2(0.331098, 0.331098)
+texture = ExtResource("4_ao5ga")
+
+[node name="Muzzle" type="Node2D" parent="Weapon"]
+position = Vector2(5.71429, -0.428572)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource("5_kwrdw")
+
+[node name="ArcadePlayerFSM" parent="." instance=ExtResource("4_76htq")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_pijx0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_87idn")]
+
+[node name="HitFlashComponent" parent="." instance=ExtResource("9_cnj2s")]
+
+[node name="FloatingDamageComponent" parent="." instance=ExtResource("10_vpyfb")]
+target_node = NodePath("..")
+
+[node name="MiniHealthBar" parent="." instance=ExtResource("8_81h4r")]
+position = Vector2(-10.6667, -17.3333)
+
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

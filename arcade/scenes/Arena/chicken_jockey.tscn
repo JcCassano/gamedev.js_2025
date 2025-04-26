@@ -1,0 +1,53 @@
+[gd_scene load_steps=12 format=3 uid="uid://bar4vc2f5ymwi"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/chicken_jockey.gd" id="1_y86v3"]
+[ext_resource type="PackedScene" uid="uid://2qbb4cq4xvxa" path="res://arcade/scenes/ui/mini_health_bar.tscn" id="2_8m4bl"]
+[ext_resource type="AudioStream" uid="uid://cs0jme7g0ngmi" path="res://sfx/hit_enemy.wav" id="2_rl8wf"]
+[ext_resource type="PackedScene" uid="uid://bdas5hugynbdk" path="res://components/health_component.tscn" id="3_h5bsi"]
+[ext_resource type="AudioStream" uid="uid://cm7dhjayfdclp" path="res://sfx/enemy_death.wav" id="3_xqulx"]
+[ext_resource type="Texture2D" uid="uid://12q0yfc3tlv1" path="res://art/chicken_jockey_64.png" id="4_7worv"]
+[ext_resource type="PackedScene" uid="uid://df4c47iu6orr8" path="res://arcade/scenes/Arena/explosion.tscn" id="5_ey7qe"]
+[ext_resource type="PackedScene" uid="uid://dg1k3ywx5fp6u" path="res://components/hit_flash/hit_flash_component.tscn" id="6_2wubl"]
+[ext_resource type="PackedScene" uid="uid://ctak6l2glhi4w" path="res://components/floating_damage_component.tscn" id="7_pdrsy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7slwi"]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pd5e"]
+radius = 11.0
+
+[node name="ChickenJockey" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_y86v3")
+hit_sfx = ExtResource("2_rl8wf")
+death_sfx = ExtResource("3_xqulx")
+
+[node name="MiniHealthBar" parent="." instance=ExtResource("2_8m4bl")]
+position = Vector2(-10, -19)
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_h5bsi")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.397633, 0.397633)
+texture = ExtResource("4_7worv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7slwi")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_4pd5e")
+
+[node name="explosion" parent="." instance=ExtResource("5_ey7qe")]
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitFlashComponent" parent="." instance=ExtResource("6_2wubl")]
+
+[node name="FloatingDamageComponent" parent="." instance=ExtResource("7_pdrsy")]
+target_node = NodePath("..")

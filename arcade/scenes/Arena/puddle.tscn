@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4qwyked637gf"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/puddle.gd" id="1_6ul3w"]
+[ext_resource type="Texture2D" uid="uid://d4fi7elr05mbh" path="res://arcade/scenes/projectiles/spill100px.png" id="2_703ma"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jsbym"]
+radius = 11.9898
+height = 46.0171
+
+[sub_resource type="Curve" id="Curve_p0a0y"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.168246), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Puddle" type="Node2D"]
+scale = Vector2(0.857142, 0.857142)
+script = ExtResource("1_6ul3w")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.58041
+shape = SubResource("CapsuleShape2D_jsbym")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.777856, 0.777856)
+texture = ExtResource("2_703ma")
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 100
+lifetime = 0.5
+spread = 180.0
+gravity = Vector2(0, -50)
+initial_velocity_min = 25.23
+initial_velocity_max = 48.92
+scale_amount_curve = SubResource("Curve_p0a0y")
+color = Color(0.701961, 1, 0.203922, 1)

@@ -1,0 +1,77 @@
+[gd_scene load_steps=12 format=3 uid="uid://ldeocegnd3da"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_0.gd" id="1_fwviu"]
+[ext_resource type="Texture2D" uid="uid://c2cnfjpupy3bq" path="res://art/blackbg.png" id="2_202rq"]
+[ext_resource type="Texture2D" uid="uid://cynvyf1eier3e" path="res://art/6332206791894617600.jpg" id="3_o1utg"]
+[ext_resource type="PackedScene" uid="uid://cxudkyhl8yykw" path="res://scenes/mess_system/mess.tscn" id="4_1abvp"]
+[ext_resource type="PackedScene" uid="uid://5o04c1vu2jg2" path="res://scenes/seats/seat_spawner.tscn" id="5_pacbp"]
+[ext_resource type="PackedScene" uid="uid://cy8owb1ghgt2" path="res://arcade/scenes/enemies/enemy_spawner.tscn" id="6_65td8"]
+[ext_resource type="PackedScene" uid="uid://dypl0ek6dcoyy" path="res://arcade/scenes/ArcadePlayer/arcade_player.tscn" id="7_nrj5s"]
+[ext_resource type="PackedScene" uid="uid://h7wyb2i1q0o7" path="res://scenes/managers/ui_manager.tscn" id="8_ewb65"]
+[ext_resource type="PackedScene" uid="uid://clnvcle014t60" path="res://scenes/ui/shift_timer.tscn" id="9_bw1vr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w5600"]
+size = Vector2(1535.58, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_damrq"]
+size = Vector2(22.0155, 380.943)
+
+[node name="level_3" type="Node"]
+script = ExtResource("1_fwviu")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-404, -314)
+texture = ExtResource("2_202rq")
+offset = Vector2(768, 512)
+
+[node name="StageBackground" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.416578, 0.351117)
+texture = ExtResource("3_o1utg")
+offset = Vector2(768, 512)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StageBackground"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(766.587, 643.66)
+shape = SubResource("RectangleShape2D_w5600")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(768.99, 965.49)
+shape = SubResource("RectangleShape2D_w5600")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(-14.4186, 811.695)
+shape = SubResource("RectangleShape2D_damrq")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(1550, 803.151)
+shape = SubResource("RectangleShape2D_damrq")
+
+[node name="Mess" parent="." instance=ExtResource("4_1abvp")]
+visible = false
+
+[node name="SeatSpawner" parent="." instance=ExtResource("5_pacbp")]
+position = Vector2(250, 254)
+spawn_interval = 4.0
+
+[node name="SeatSpawner2" parent="." instance=ExtResource("5_pacbp")]
+position = Vector2(320, 302)
+spawn_interval = 2.0
+
+[node name="SeatSpawner3" parent="." instance=ExtResource("5_pacbp")]
+position = Vector2(383, 252)
+spawn_interval = 4.0
+
+[node name="EnemySpawner" parent="." instance=ExtResource("6_65td8")]
+spawn_limit = 9999
+
+[node name="ArcadePlayer" parent="." instance=ExtResource("7_nrj5s")]
+position = Vector2(282, 299)
+
+[node name="UIManager" parent="." instance=ExtResource("8_ewb65")]
+
+[node name="ShitfTimer" parent="UIManager" instance=ExtResource("9_bw1vr")]
+shift_duration = 60
+metadata/_edit_use_anchors_ = true

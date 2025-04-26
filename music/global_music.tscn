@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://lc5eqgle8ocw"]
+
+[ext_resource type="AudioStream" uid="uid://83srs1otw5om" path="res://music/BetweenShifts_Song.mp3" id="1_2hmc1"]
+
+[node name="GlobalMusic" type="Node"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_2hmc1")
+autoplay = true
+bus = &"BackgroundMusic"
+parameters/looping = true

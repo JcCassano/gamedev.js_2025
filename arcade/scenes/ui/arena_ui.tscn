@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://eotk1krtxc3r"]
+
+[ext_resource type="PackedScene" uid="uid://b0gm6lcy78wvg" path="res://scenes/ui/pause_menu.tscn" id="1_ibbeo"]
+[ext_resource type="PackedScene" uid="uid://c76y6sg5dmarf" path="res://scenes/ui/game_over_menu.tscn" id="2_jvvi6"]
+
+[node name="ArenaUI" type="CanvasLayer"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("1_ibbeo")]
+
+[node name="GameOverMenu" parent="." instance=ExtResource("2_jvvi6")]
+
+[node name="SurvivalTimerLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "
+"

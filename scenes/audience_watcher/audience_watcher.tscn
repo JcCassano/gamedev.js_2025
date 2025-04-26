@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://b87gop6gry1lr"]
+
+[ext_resource type="Texture2D" uid="uid://cmo45puqqpile" path="res://scenes/audience_watcher/figure32.png" id="1_olqms"]
+[ext_resource type="Script" path="res://scenes/audience_watcher/audience_watcher.gd" id="1_pmq0a"]
+[ext_resource type="PackedScene" uid="uid://dujfaf0edrs5f" path="res://components/squash_stretch_component.tscn" id="3_divdy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kbwuv"]
+
+[node name="AudienceWatcher" type="CharacterBody2D" node_paths=PackedStringArray("squash_node")]
+script = ExtResource("1_pmq0a")
+squash_node = NodePath("SquashStretchComponent")
+
+[node name="VisionCone" type="Polygon2D" parent="."]
+color = Color(0, 0.203922, 0.498039, 0.12549)
+texture = SubResource("ViewportTexture_kbwuv")
+polygon = PackedVector2Array(143, -84, 55, -91, 0, -94, -56, -89, -141, -84, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_olqms")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCenter" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(0, -95)
+
+[node name="RayCenter3" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(26, -92)
+
+[node name="RayCenter2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-27, -92)
+
+[node name="RayLeft" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-57, -90)
+
+[node name="RayLeftMost" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-142, -84)
+
+[node name="RayLeftMost2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-94, -86)
+
+[node name="RayRight" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(55, -92)
+
+[node name="RayRightMost" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(148, -87)
+
+[node name="RayRightMost2" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(94, -87)
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="SquashStretchComponent" parent="." instance=ExtResource("3_divdy")]
+
+[node name="Visual" type="Node2D" parent="."]

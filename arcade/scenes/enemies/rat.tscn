@@ -1,0 +1,70 @@
+[gd_scene load_steps=15 format=3 uid="uid://bb707ec5mvaxk"]
+
+[ext_resource type="Texture2D" uid="uid://bj8awjjprkp3x" path="res://arcade/enemies/rat_normal.png" id="1_6slmy"]
+[ext_resource type="Script" path="res://arcade/scenes/enemies/rat.gd" id="1_726pm"]
+[ext_resource type="PackedScene" uid="uid://2qbb4cq4xvxa" path="res://arcade/scenes/ui/mini_health_bar.tscn" id="2_fpacb"]
+[ext_resource type="PackedScene" uid="uid://df4c47iu6orr8" path="res://arcade/scenes/Arena/explosion.tscn" id="2_kranu"]
+[ext_resource type="PackedScene" uid="uid://bdas5hugynbdk" path="res://components/health_component.tscn" id="2_qv7c3"]
+[ext_resource type="AudioStream" uid="uid://cs0jme7g0ngmi" path="res://sfx/hit_enemy.wav" id="3_w5tmd"]
+[ext_resource type="AudioStream" uid="uid://cm7dhjayfdclp" path="res://sfx/enemy_death.wav" id="4_2d5y5"]
+[ext_resource type="Texture2D" uid="uid://b2cgja2i725yt" path="res://arcade/enemies/rat_fast.png" id="4_lea6p"]
+[ext_resource type="Texture2D" uid="uid://b67o0wftj5nwb" path="res://arcade/enemies/rat_tank.png" id="5_cfuyu"]
+[ext_resource type="PackedScene" uid="uid://dg1k3ywx5fp6u" path="res://components/hit_flash/hit_flash_component.tscn" id="8_2gl5h"]
+[ext_resource type="PackedScene" uid="uid://8qmsqf2x08cl" path="res://arcade/scenes/weapons/powerup_shotgun.tscn" id="8_ukjth"]
+[ext_resource type="PackedScene" uid="uid://ctak6l2glhi4w" path="res://components/floating_damage_component.tscn" id="9_g2i7i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enkpv"]
+radius = 15.3802
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k80e5"]
+radius = 13.3537
+
+[node name="rat" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(0.6, 0.6)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_726pm")
+rat_type = 1
+explosion_scene = ExtResource("2_kranu")
+sprite_normal = ExtResource("1_6slmy")
+sprite_fast = ExtResource("4_lea6p")
+sprite_tank = ExtResource("5_cfuyu")
+hit_sfx = ExtResource("3_w5tmd")
+death_sfx = ExtResource("4_2d5y5")
+scale_normal = Vector2(0.5, 0.5)
+scale_fast = Vector2(0.3, 0.3)
+scale_tank = Vector2(0.75, 0.75)
+rat_dash_duration = 0.3
+powerup_scene = ExtResource("8_ukjth")
+
+[node name="MiniHealthBar" parent="." instance=ExtResource("2_fpacb")]
+position = Vector2(-10, -25)
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_qv7c3")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.397633, 0.397633)
+texture = ExtResource("1_6slmy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_enkpv")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_k80e5")
+
+[node name="explosion" parent="." instance=ExtResource("2_kranu")]
+
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="."]
+
+[node name="HitFlashComponent" parent="." instance=ExtResource("8_2gl5h")]
+
+[node name="FloatingDamageComponent" parent="." instance=ExtResource("9_g2i7i")]
+target_node = NodePath("..")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_attack_area_body_entered"]

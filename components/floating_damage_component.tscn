@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctak6l2glhi4w"]
+
+[ext_resource type="Script" path="res://components/floating_damage_component.gd" id="1_hj4uq"]
+
+[node name="FloatingDamageComponent" type="Node"]
+script = ExtResource("1_hj4uq")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

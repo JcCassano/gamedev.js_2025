@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dg1k3ywx5fp6u"]
+
+[ext_resource type="Script" path="res://components/hit_flash/shader_node.gd" id="1_esjpa"]
+[ext_resource type="Script" path="res://components/hit_flash/hit_flash_component.gd" id="1_pebys"]
+[ext_resource type="Material" uid="uid://b8w2agmdscqes" path="res://components/hit_flash/shader_material.tres" id="3_2ip1u"]
+
+[node name="HitFlashComponent" type="Node"]
+script = ExtResource("1_pebys")
+
+[node name="ShaderNode" type="Node2D" parent="."]
+script = ExtResource("1_esjpa")
+flash_material = ExtResource("3_2ip1u")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 1, 1, 0)

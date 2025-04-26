@@ -1,0 +1,130 @@
+[gd_scene load_steps=22 format=3 uid="uid://clcscsbj372t2"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/arena.gd" id="1_2m1qa"]
+[ext_resource type="Texture2D" uid="uid://cynvyf1eier3e" path="res://art/6332206791894617600.jpg" id="1_051pa"]
+[ext_resource type="PackedScene" uid="uid://dypl0ek6dcoyy" path="res://arcade/scenes/ArcadePlayer/arcade_player.tscn" id="2_xxvud"]
+[ext_resource type="Texture2D" uid="uid://c2cnfjpupy3bq" path="res://art/blackbg.png" id="3_qnst1"]
+[ext_resource type="PackedScene" uid="uid://cy8owb1ghgt2" path="res://arcade/scenes/enemies/enemy_spawner.tscn" id="5_tvuwq"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/projectile_spawner.gd" id="7_3xvtq"]
+[ext_resource type="PackedScene" uid="uid://ciu1qhoq24yi2" path="res://arcade/scenes/Arena/red_x.tscn" id="8_0htrw"]
+[ext_resource type="PackedScene" uid="uid://bfvjlusq0kvdv" path="res://arcade/scenes/Arena/arena_projectile.tscn" id="9_efp2a"]
+[ext_resource type="PackedScene" uid="uid://r3itb5l7mp4v" path="res://arcade/scenes/Arena/drink_projectile.tscn" id="9_k2dct"]
+[ext_resource type="PackedScene" uid="uid://eotk1krtxc3r" path="res://arcade/scenes/ui/arena_ui.tscn" id="9_ofq3m"]
+[ext_resource type="AudioStream" uid="uid://bi54ak5t5bpjc" path="res://arcade/sfx/chicken_jockey.mp3" id="9_un5d0"]
+[ext_resource type="AudioStream" uid="uid://yoorn3tl10l4" path="res://arcade/sfx/chicken_jockey_audience.mp3" id="10_m82po"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/foreground_audience.gd" id="13_ghs7n"]
+[ext_resource type="Texture2D" uid="uid://dh7a1wrgeox3s" path="res://art/audience1.png" id="13_rlp8w"]
+[ext_resource type="Texture2D" uid="uid://wut6u7kddr7s" path="res://art/audience2.png" id="14_e6dhh"]
+[ext_resource type="Texture2D" uid="uid://bnfpjwxf30tg1" path="res://art/audience4.png" id="15_cxbsu"]
+[ext_resource type="PackedScene" uid="uid://dujfaf0edrs5f" path="res://components/squash_stretch_component.tscn" id="15_npigp"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/squash_stretch.gd" id="16_5q0nl"]
+[ext_resource type="Texture2D" uid="uid://bpn5w14lj0oi0" path="res://art/audience3.png" id="16_n2hrx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkw77"]
+size = Vector2(1535.58, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_of70v"]
+size = Vector2(22.0155, 380.943)
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_2m1qa")
+arena_ui_scene = ExtResource("9_ofq3m")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-404, -314)
+texture = ExtResource("3_qnst1")
+offset = Vector2(768, 512)
+
+[node name="StageBackground" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-5, 0)
+scale = Vector2(0.424941, 0.375149)
+texture = ExtResource("1_051pa")
+offset = Vector2(768, 512)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StageBackground"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(767.165, 637.08)
+shape = SubResource("RectangleShape2D_vkw77")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(768.99, 965.49)
+shape = SubResource("RectangleShape2D_vkw77")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(-14.4186, 811.695)
+shape = SubResource("RectangleShape2D_of70v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(1550, 803.151)
+shape = SubResource("RectangleShape2D_of70v")
+
+[node name="ArcadePlayer" parent="." instance=ExtResource("2_xxvud")]
+position = Vector2(353, 306)
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(317, 274)
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+script = ExtResource("7_3xvtq")
+red_x_scene = ExtResource("8_0htrw")
+popcorn_projectile_scene = ExtResource("9_efp2a")
+drink_projectile_scene = ExtResource("9_k2dct")
+arena_bounds = Rect2(10, 260, 640, 70)
+multi_projectile_increase_interval = 20.0
+max_projectiles_per_wave = 200
+rotation_range_degrees = 90.0
+event_duration = 5.0
+chicken_jockey_audio = ExtResource("9_un5d0")
+chicken_audience_audio = ExtResource("10_m82po")
+
+[node name="Timer" type="Timer" parent="ProjectileSpawner"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("5_tvuwq")]
+spawn_limit = 10000000000000000
+difficulty_increase_interval = 60.0
+
+[node name="UIManager" parent="." instance=ExtResource("9_ofq3m")]
+
+[node name="ForegroundAudience" type="Node2D" parent="."]
+z_index = 111
+script = ExtResource("13_ghs7n")
+
+[node name="Audience1" type="Sprite2D" parent="ForegroundAudience"]
+position = Vector2(181, 388)
+texture = ExtResource("13_rlp8w")
+
+[node name="SquashStretch" parent="ForegroundAudience/Audience1" instance=ExtResource("15_npigp")]
+script = ExtResource("16_5q0nl")
+
+[node name="Audience2" type="Sprite2D" parent="ForegroundAudience"]
+position = Vector2(303, 379)
+texture = ExtResource("14_e6dhh")
+flip_h = true
+
+[node name="SquashStretch" parent="ForegroundAudience/Audience2" instance=ExtResource("15_npigp")]
+script = null
+
+[node name="Audience3" type="Sprite2D" parent="ForegroundAudience"]
+position = Vector2(437, 386)
+texture = ExtResource("15_cxbsu")
+flip_h = true
+
+[node name="SquashStretch" parent="ForegroundAudience/Audience3" instance=ExtResource("15_npigp")]
+script = null
+
+[node name="Audience5" type="Sprite2D" parent="ForegroundAudience"]
+position = Vector2(48, 373)
+texture = ExtResource("15_cxbsu")
+
+[node name="SquashStretch" parent="ForegroundAudience/Audience5" instance=ExtResource("15_npigp")]
+script = null
+
+[node name="Audience4" type="Sprite2D" parent="ForegroundAudience"]
+position = Vector2(589, 347)
+texture = ExtResource("16_n2hrx")
+
+[node name="SquashStretch" parent="ForegroundAudience/Audience4" instance=ExtResource("15_npigp")]
+script = null

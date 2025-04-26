@@ -1,0 +1,294 @@
+[gd_scene load_steps=26 format=3 uid="uid://clcscsbj372t2"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/arena.gd" id="1_2m1qa"]
+[ext_resource type="Texture2D" uid="uid://cynvyf1eier3e" path="res://art/6332206791894617600.jpg" id="1_051pa"]
+[ext_resource type="PackedScene" uid="uid://dypl0ek6dcoyy" path="res://arcade/scenes/ArcadePlayer/arcade_player.tscn" id="2_xxvud"]
+[ext_resource type="Texture2D" uid="uid://c2cnfjpupy3bq" path="res://art/blackbg.png" id="3_qnst1"]
+[ext_resource type="PackedScene" uid="uid://cy8owb1ghgt2" path="res://arcade/scenes/enemies/enemy_spawner.tscn" id="5_tvuwq"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/flicker.gd" id="6_6iren"]
+[ext_resource type="Texture2D" uid="uid://dr12i7wrq1e33" path="res://art/circlepng.png" id="6_fkia1"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/arena_event_manager.gd" id="6_kk28g"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/projectile_spawner.gd" id="7_3xvtq"]
+[ext_resource type="PackedScene" uid="uid://ciu1qhoq24yi2" path="res://arcade/scenes/Arena/red_x.tscn" id="8_0htrw"]
+[ext_resource type="PackedScene" uid="uid://bfvjlusq0kvdv" path="res://arcade/scenes/Arena/arena_projectile.tscn" id="9_efp2a"]
+[ext_resource type="PackedScene" uid="uid://r3itb5l7mp4v" path="res://arcade/scenes/Arena/drink_projectile.tscn" id="9_k2dct"]
+[ext_resource type="PackedScene" uid="uid://eotk1krtxc3r" path="res://arcade/scenes/ui/arena_ui.tscn" id="9_ofq3m"]
+[ext_resource type="AudioStream" uid="uid://bi54ak5t5bpjc" path="res://arcade/sfx/chicken_jockey.mp3" id="9_un5d0"]
+[ext_resource type="AudioStream" uid="uid://yoorn3tl10l4" path="res://arcade/sfx/chicken_jockey_audience.mp3" id="10_m82po"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/foreground_audience.gd" id="13_ghs7n"]
+[ext_resource type="Texture2D" uid="uid://dh7a1wrgeox3s" path="res://art/audience1.png" id="13_rlp8w"]
+[ext_resource type="Texture2D" uid="uid://wut6u7kddr7s" path="res://art/audience2.png" id="14_e6dhh"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/foreground_squash.gd" id="15_2igwl"]
+[ext_resource type="Texture2D" uid="uid://bnfpjwxf30tg1" path="res://art/audience4.png" id="15_cxbsu"]
+[ext_resource type="Texture2D" uid="uid://bpn5w14lj0oi0" path="res://art/audience3.png" id="16_n2hrx"]
+
+[sub_resource type="Gradient" id="Gradient_uivp6"]
+offsets = PackedFloat32Array(0, 0.335092, 0.496042, 0.638522, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.168865, 0.168865, 0.168865, 1, 1, 1, 1, 1, 0.168627, 0.168627, 0.168627, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jhxcd"]
+gradient = SubResource("Gradient_uivp6")
+width = 512
+height = 256
+fill_from = Vector2(0.431151, 0.0361174)
+fill_to = Vector2(0.399549, 0.857788)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkw77"]
+size = Vector2(1535.58, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_of70v"]
+size = Vector2(22.0155, 380.943)
+
+[node name="Arena" type="Node2D"]
+script = ExtResource("1_2m1qa")
+arena_ui_scene = ExtResource("9_ofq3m")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-404, -314)
+texture = ExtResource("3_qnst1")
+offset = Vector2(768, 512)
+
+[node name="StageBackground" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-5, 0)
+scale = Vector2(0.424941, 0.375149)
+texture = ExtResource("1_051pa")
+offset = Vector2(768, 512)
+
+[node name="tv_light" type="PointLight2D" parent="StageBackground"]
+position = Vector2(760.106, 477.144)
+scale = Vector2(6.79537, 4.35991)
+energy = 0.55
+range_z_min = -700
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_jhxcd")
+texture_scale = 2.7
+
+[node name="tv_light2" type="PointLight2D" parent="StageBackground"]
+position = Vector2(776.578, 338.532)
+rotation = 1.56308
+scale = Vector2(0.68402, 3.69)
+energy = 0.2
+range_z_min = -700
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_jhxcd")
+texture_scale = 2.7
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StageBackground"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(767.165, 637.08)
+shape = SubResource("RectangleShape2D_vkw77")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(767.165, 932.963)
+shape = SubResource("RectangleShape2D_vkw77")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(-14.4186, 811.695)
+shape = SubResource("RectangleShape2D_of70v")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StageBackground/StaticBody2D"]
+position = Vector2(1550, 803.151)
+shape = SubResource("RectangleShape2D_of70v")
+
+[node name="FlickerLights" type="Node2D" parent="StageBackground"]
+z_index = 100
+
+[node name="FlickerLight1" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(136.49, 143.943)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight2" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(329.458, 293.217)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight3" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(560.078, 143.943)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight4" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(743.633, 301.214)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight5" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(938.954, 149.274)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight6" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1091.92, 303.879)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight7" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1251.94, 159.936)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight8" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1402.55, 301.214)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight9" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1254.29, 501.134)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight10" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(946.014, 482.475)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight11" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(541.252, 463.816)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight12" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(174.142, 450.488)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight13" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(75.3046, 650.408)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight14" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(334.164, 650.408)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight15" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(656.562, 661.071)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight16" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1054.26, 666.402)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight17" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1423.73, 661.071)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight18" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(1230.76, 807.679)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight19" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(870.709, 802.348)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight20" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(501.246, 831.67)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="FlickerLight21" type="PointLight2D" parent="StageBackground/FlickerLights"]
+position = Vector2(202.381, 821.007)
+texture = ExtResource("6_fkia1")
+texture_scale = 0.5
+script = ExtResource("6_6iren")
+
+[node name="ArenaEventManager" type="Node" parent="."]
+script = ExtResource("6_kk28g")
+chicken_jockey_audio = ExtResource("9_un5d0")
+chicken_audience_audio = ExtResource("10_m82po")
+flicker_duration = null
+
+[node name="ArcadePlayer" parent="." instance=ExtResource("2_xxvud")]
+position = Vector2(353, 306)
+
+[node name="PointLight2D" type="PointLight2D" parent="ArcadePlayer"]
+scale = Vector2(0.2, 0.205917)
+energy = 0.2
+texture = ExtResource("6_fkia1")
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(317, 274)
+
+[node name="ProjectileSpawner" type="Node2D" parent="."]
+script = ExtResource("7_3xvtq")
+red_x_scene = ExtResource("8_0htrw")
+popcorn_projectile_scene = ExtResource("9_efp2a")
+drink_projectile_scene = ExtResource("9_k2dct")
+arena_bounds = Rect2(10, 260, 640, 70)
+multi_projectile_increase_interval = 10.0
+max_projectiles_per_wave = 200
+rotation_range_degrees = 90.0
+
+[node name="Timer" type="Timer" parent="ProjectileSpawner"]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("5_tvuwq")]
+spawn_limit = 10000000000000000
+difficulty_increase_interval = 90.0
+
+[node name="UIManager" parent="." instance=ExtResource("9_ofq3m")]
+
+[node name="ForegroundAudience" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+z_index = 111
+position = Vector2(1, 1)
+script = ExtResource("13_ghs7n")
+player = NodePath("../ArcadePlayer")
+
+[node name="Audience1" type="Sprite2D" parent="ForegroundAudience" groups=["foreground_squash"]]
+position = Vector2(181, 388)
+texture = ExtResource("13_rlp8w")
+script = ExtResource("15_2igwl")
+
+[node name="Audience2" type="Sprite2D" parent="ForegroundAudience" groups=["foreground_squash"]]
+position = Vector2(303, 379)
+texture = ExtResource("14_e6dhh")
+flip_h = true
+script = ExtResource("15_2igwl")
+
+[node name="Audience3" type="Sprite2D" parent="ForegroundAudience" groups=["foreground_squash"]]
+position = Vector2(437, 386)
+texture = ExtResource("15_cxbsu")
+flip_h = true
+script = ExtResource("15_2igwl")
+
+[node name="Audience5" type="Sprite2D" parent="ForegroundAudience" groups=["foreground_squash"]]
+position = Vector2(48, 373)
+texture = ExtResource("15_cxbsu")
+script = ExtResource("15_2igwl")
+
+[node name="Audience4" type="Sprite2D" parent="ForegroundAudience" groups=["foreground_squash"]]
+position = Vector2(589, 347)
+texture = ExtResource("16_n2hrx")
+script = ExtResource("15_2igwl")

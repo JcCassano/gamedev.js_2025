@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6ff0y78ilf8t"]
+
+[ext_resource type="Texture2D" uid="uid://bfaercovclljx" path="res://art/noodlesmain.png" id="1_cbs4y"]
+[ext_resource type="Script" path="res://arcade/scenes/Arena/noodle_projectile.gd" id="1_j7nfp"]
+[ext_resource type="PackedScene" uid="uid://dop880a4uvg3e" path="res://arcade/scenes/Arena/noodle_pickup.tscn" id="2_w8r0s"]
+[ext_resource type="Texture2D" uid="uid://ukrvs06pe7at" path="res://scenes/projectile/shadow.png" id="3_5krug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbwsn"]
+radius = 46.6667
+
+[sub_resource type="Curve" id="Curve_k0w4i"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.168246), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="NoodleProjectile" type="Node2D"]
+texture_filter = 1
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_j7nfp")
+noodle_pickup_scene = ExtResource("2_w8r0s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cbs4y")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 4)
+scale = Vector2(0.431973, 0.431973)
+texture = ExtResource("3_5krug")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hbwsn")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+scale_amount_curve = SubResource("Curve_k0w4i")
+color = Color(0.946809, 0.899814, 0.621704, 1)

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy8owb1ghgt2"]
+
+[ext_resource type="Script" path="res://arcade/scenes/enemies/enemy_spawner.gd" id="1_hhriv"]
+[ext_resource type="PackedScene" uid="uid://bb707ec5mvaxk" path="res://arcade/scenes/enemies/rat.tscn" id="2_0upxw"]
+[ext_resource type="PackedScene" uid="uid://bar4vc2f5ymwi" path="res://arcade/scenes/Arena/chicken_jockey.tscn" id="3_rryyj"]
+
+[node name="EnemySpawner" type="Node"]
+script = ExtResource("1_hhriv")
+rat_scene = ExtResource("2_0upxw")
+chicken_jockey_scene = ExtResource("3_rryyj")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnPoint1" type="Marker2D" parent="."]
+position = Vector2(9, 280)
+
+[node name="SpawnPoint4" type="Marker2D" parent="."]
+position = Vector2(10, 338)
+
+[node name="SpawnPoint2" type="Marker2D" parent="."]
+position = Vector2(629, 283)
+
+[node name="SpawnPoint3" type="Marker2D" parent="."]
+position = Vector2(629, 336)

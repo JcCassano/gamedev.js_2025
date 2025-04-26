@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfvjlusq0kvdv"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/arena_projectile.gd" id="1_yw4af"]
+[ext_resource type="Texture2D" uid="uid://c1m1mjq6xaxjg" path="res://scenes/projectile/popcorn.png" id="2_t8rop"]
+[ext_resource type="Texture2D" uid="uid://ukrvs06pe7at" path="res://scenes/projectile/shadow.png" id="3_nyxlv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1pj6p"]
+
+[sub_resource type="Curve" id="Curve_lvxlv"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.168246), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="ArenaProjectile" type="Node2D"]
+script = ExtResource("1_yw4af")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+scale = Vector2(0.458419, 0.458419)
+shape = SubResource("CircleShape2D_1pj6p")
+
+[node name="Projectile" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.0184184, 0.0184184)
+texture = ExtResource("2_t8rop")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 6)
+scale = Vector2(1.4759, 1.4759)
+texture = ExtResource("3_nyxlv")
+
+[node name="CleanupTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+scale_amount_curve = SubResource("Curve_lvxlv")
+color = Color(0.698039, 0.627451, 0.384314, 1)

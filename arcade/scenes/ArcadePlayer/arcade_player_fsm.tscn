@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ded344mxfqtf0"]
+
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_idle.gd" id="1_g7x8a"]
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_player_fsm.gd" id="1_vks1t"]
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_move.gd" id="2_emmlj"]
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_dash.gd" id="4_1obdy"]
+
+[node name="ArcadePlayerFSM" type="Node"]
+script = ExtResource("1_vks1t")
+
+[node name="ArcadeIdle" type="Node" parent="."]
+script = ExtResource("1_g7x8a")
+
+[node name="ArcadeMove" type="Node" parent="."]
+script = ExtResource("2_emmlj")
+
+[node name="ArcadeDash" type="Node" parent="."]
+script = ExtResource("4_1obdy")

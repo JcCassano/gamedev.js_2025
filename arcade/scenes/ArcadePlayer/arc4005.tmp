@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://dypl0ek6dcoyy"]
+
+[ext_resource type="Script" path="res://arcade/scenes/ArcadePlayer/arcade_player.gd" id="1_0olhx"]
+[ext_resource type="Texture2D" uid="uid://dknghbim7dbgj" path="res://art/player.png" id="1_7tsok"]
+[ext_resource type="PackedScene" uid="uid://cjahsfn5pmg6r" path="res://components/velocity_component.tscn" id="1_pijx0"]
+[ext_resource type="Script" path="res://arcade/scenes/weapons/weapon.gd" id="2_n5kao"]
+[ext_resource type="PackedScene" uid="uid://ded344mxfqtf0" path="res://arcade/scenes/ArcadePlayer/arcade_player_fsm.tscn" id="4_76htq"]
+[ext_resource type="Texture2D" uid="uid://bh002ijei3s16" path="res://art/popgun_pixel2-export.png" id="4_ao5ga"]
+[ext_resource type="AudioStream" uid="uid://rv5bmrvdr5kp" path="res://sfx/Popcorn_Shot1.wav" id="5_kwrdw"]
+[ext_resource type="PackedScene" uid="uid://bdas5hugynbdk" path="res://components/health_component.tscn" id="7_87idn"]
+[ext_resource type="PackedScene" uid="uid://2qbb4cq4xvxa" path="res://arcade/scenes/ui/mini_health_bar.tscn" id="8_81h4r"]
+[ext_resource type="PackedScene" uid="uid://dg1k3ywx5fp6u" path="res://components/hit_flash/hit_flash_component.tscn" id="9_cnj2s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_267mj"]
+size = Vector2(14, 8.28572)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_esmnt"]
+size = Vector2(13.5714, 22.8571)
+
+[node name="ArcadePlayer" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component") groups=["player"]]
+texture_filter = 1
+position = Vector2(0, -2)
+scale = Vector2(1.4, 1.4)
+collision_mask = 4
+script = ExtResource("1_0olhx")
+velocity_component = NodePath("VelocityComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-15.7143, -16.4286)
+texture = ExtResource("1_7tsok")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.85714)
+shape = SubResource("RectangleShape2D_267mj")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, 9.28571)
+scale = Vector2(1, 0.4)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0.357143, 0.714285)
+shape = SubResource("RectangleShape2D_esmnt")
+
+[node name="Weapon" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 4)
+script = ExtResource("2_n5kao")
+fire_sfx = ExtResource("5_kwrdw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon"]
+z_index = 1
+texture_filter = 1
+scale = Vector2(0.331098, 0.331098)
+texture = ExtResource("4_ao5ga")
+
+[node name="Muzzle" type="Node2D" parent="Weapon"]
+position = Vector2(5.71429, -0.428572)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Weapon"]
+stream = ExtResource("5_kwrdw")
+
+[node name="ArcadePlayerFSM" parent="." instance=ExtResource("4_76htq")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("1_pijx0")]
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_87idn")]
+max_health = 5
+
+[node name="HitFlashComponent" parent="." instance=ExtResource("9_cnj2s")]
+
+[node name="MiniHealthBar" parent="." instance=ExtResource("8_81h4r")]
+position = Vector2(-10.7143, -17.1429)
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

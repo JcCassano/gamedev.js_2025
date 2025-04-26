@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://r3itb5l7mp4v"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/drink_projectile.gd" id="1_4b22o"]
+[ext_resource type="Texture2D" uid="uid://cmf2madjoq0r4" path="res://arcade/scenes/projectiles/drink100px.png" id="1_psxns"]
+[ext_resource type="PackedScene" uid="uid://b4qwyked637gf" path="res://arcade/scenes/Arena/puddle.tscn" id="2_3y4nu"]
+[ext_resource type="Texture2D" uid="uid://ukrvs06pe7at" path="res://scenes/projectile/shadow.png" id="2_scmj6"]
+[ext_resource type="PackedScene" uid="uid://dop880a4uvg3e" path="res://arcade/scenes/Arena/noodle_pickup.tscn" id="3_cyuu8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33vvn"]
+size = Vector2(6, 8)
+
+[sub_resource type="Curve" id="Curve_7q5kl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.168246), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="DrinkProjectile" type="Node2D"]
+texture_filter = 1
+scale = Vector2(2.67037, 2.67037)
+script = ExtResource("1_4b22o")
+puddle_scene = ExtResource("2_3y4nu")
+noodle_pickup_scene = ExtResource("3_cyuu8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_33vvn")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 4)
+scale = Vector2(0.431973, 0.431973)
+texture = ExtResource("2_scmj6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0665506, 0.0665506)
+texture = ExtResource("1_psxns")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+scale_amount_curve = SubResource("Curve_7q5kl")
+color = Color(0.701961, 1, 0.203922, 1)
+
+[node name="CleanupTimer" type="Timer" parent="."]

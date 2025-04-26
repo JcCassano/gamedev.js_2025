@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc3b2nkusspc0"]
+
+[ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_oo6lo"]
+[ext_resource type="PackedScene" uid="uid://64ftrsayaxj2" path="res://components/floating_ui.tscn" id="2_ni2fe"]
+[ext_resource type="Texture2D" uid="uid://c2cnfjpupy3bq" path="res://art/blackbg.png" id="3_ccsrj"]
+[ext_resource type="Texture2D" uid="uid://chmban72ho7ep" path="res://art/options.png" id="4_dviko"]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+script = ExtResource("1_oo6lo")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-404, -314)
+texture = ExtResource("3_ccsrj")
+offset = Vector2(768, 512)
+
+[node name="Ticket" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(315, 179)
+scale = Vector2(0.36377, 0.36377)
+texture = ExtResource("4_dviko")
+
+[node name="FloatingUI" parent="Ticket" instance=ExtResource("2_ni2fe")]
+
+[node name="Panel" type="Panel" parent="Ticket"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -930.19
+offset_top = -709.927
+offset_right = -780.19
+offset_bottom = -529.927
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.24115, 2.24115)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ticket/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -80.0
+offset_right = 64.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FullscreenCheck" type="CheckButton" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+text = "FullScreen"
+
+[node name="Label" type="Label" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+text = "BGM Volume"
+
+[node name="BGMVolumeSlider" type="HSlider" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="Ticket/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"

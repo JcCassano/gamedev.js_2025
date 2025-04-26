@@ -1,0 +1,161 @@
+[gd_scene load_steps=8 format=3 uid="uid://dbdlcyth7b7mx"]
+
+[ext_resource type="Script" path="res://scenes/main/main_menu.gd" id="1_fcppg"]
+[ext_resource type="PackedScene" uid="uid://64ftrsayaxj2" path="res://components/floating_ui.tscn" id="2_70bjl"]
+[ext_resource type="Texture2D" uid="uid://c2cnfjpupy3bq" path="res://art/blackbg.png" id="2_cx45u"]
+[ext_resource type="Texture2D" uid="uid://cp8ggvdfamxxm" path="res://art/mainfinale.png" id="4_3vt7g"]
+[ext_resource type="Texture2D" uid="uid://co7num7p0scgt" path="res://art/chairNormal.png" id="5_3jit7"]
+[ext_resource type="Texture2D" uid="uid://12q0yfc3tlv1" path="res://art/chicken_jockey_64.png" id="5_is7uq"]
+[ext_resource type="Texture2D" uid="uid://d3qmy460eso3i" path="res://art/overchair.png" id="6_6whvx"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_fcppg")
+
+[node name="FloatingUI" parent="." instance=ExtResource("2_70bjl")]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-404, -314)
+texture = ExtResource("2_cx45u")
+offset = Vector2(768, 512)
+
+[node name="Ticket" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(315, 179)
+scale = Vector2(0.36377, 0.36377)
+texture = ExtResource("4_3vt7g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 118.0
+offset_top = 154.0
+offset_right = 248.0
+offset_bottom = 305.0
+scale = Vector2(0.679375, 0.679375)
+
+[node name="InstructionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Info"
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="OverTimeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Arcade"
+icon = ExtResource("5_is7uq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label2" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 144.0
+offset_right = 563.0
+offset_bottom = 167.0
+scale = Vector2(0.728406, 0.728406)
+text = "Levels"
+
+[node name="LevelButton_0" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 289.0
+offset_top = 166.0
+offset_right = 379.0
+offset_bottom = 252.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_1" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 165.0
+offset_right = 436.0
+offset_bottom = 251.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_2" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 165.0
+offset_right = 492.0
+offset_bottom = 251.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_3" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 203.0
+offset_right = 378.0
+offset_bottom = 289.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_4" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 202.0
+offset_right = 436.0
+offset_bottom = 288.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_5" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 401.0
+offset_top = 201.0
+offset_right = 491.0
+offset_bottom = 287.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_6" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 238.0
+offset_right = 378.0
+offset_bottom = 324.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_7" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 238.0
+offset_right = 436.0
+offset_bottom = 324.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="LevelButton_8" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 237.0
+offset_right = 490.0
+offset_bottom = 323.0
+scale = Vector2(0.28049, 0.28049)
+texture_normal = ExtResource("5_3jit7")
+texture_hover = ExtResource("6_6whvx")
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 225.0
+offset_right = 499.0
+offset_bottom = 256.0
+scale = Vector2(1.05924, 0.993999)
+text = "Quit"

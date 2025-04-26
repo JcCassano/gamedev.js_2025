@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://s7nhql0aqqds"]
+
+[ext_resource type="Script" path="res://components/FSM/fsm.gd" id="1_lv6ew"]
+[ext_resource type="Script" path="res://components/FSM/idle.gd" id="2_ed4ri"]
+[ext_resource type="Script" path="res://components/FSM/move.gd" id="3_0nhen"]
+[ext_resource type="Script" path="res://components/FSM/dash.gd" id="4_e012j"]
+
+[node name="FSM" type="Node"]
+script = ExtResource("1_lv6ew")
+
+[node name="Idle" type="Node" parent="."]
+script = ExtResource("2_ed4ri")
+
+[node name="Move" type="Node" parent="."]
+script = ExtResource("3_0nhen")
+
+[node name="Dash" type="Node" parent="."]
+script = ExtResource("4_e012j")

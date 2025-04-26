@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciu1qhoq24yi2"]
+
+[ext_resource type="Script" path="res://arcade/scenes/Arena/red_x.gd" id="1_77fnc"]
+[ext_resource type="Texture2D" uid="uid://cxqv31td6ipwf" path="res://arcade/scenes/Arena/red_x.png" id="1_xccn4"]
+
+[node name="RedX" type="Node2D"]
+z_index = 100
+script = ExtResource("1_77fnc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+scale = Vector2(0.0157035, 0.0157035)
+texture = ExtResource("1_xccn4")
+
+[node name="CleanupTimer" type="Timer" parent="."]
+wait_time = 0.6
+one_shot = true
+autostart = true

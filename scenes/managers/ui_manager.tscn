@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://h7wyb2i1q0o7"]
+
+[ext_resource type="PackedScene" uid="uid://dvt8nbkxinihj" path="res://scenes/ui/rage_bar.tscn" id="1_1t7hu"]
+[ext_resource type="PackedScene" uid="uid://c481gvvas5wdc" path="res://scenes/ui/clean_bar.tscn" id="2_d6bsw"]
+[ext_resource type="PackedScene" uid="uid://b0gm6lcy78wvg" path="res://scenes/ui/pause_menu.tscn" id="4_ffr4w"]
+[ext_resource type="PackedScene" uid="uid://c76y6sg5dmarf" path="res://scenes/ui/game_over_menu.tscn" id="5_jv4r6"]
+[ext_resource type="PackedScene" uid="uid://ct73jltwnr38a" path="res://scenes/ui/win_menu.tscn" id="6_ytly0"]
+
+[node name="UIManager" type="CanvasLayer"]
+
+[node name="RageBar" parent="." instance=ExtResource("1_1t7hu")]
+
+[node name="CleanBar" parent="." instance=ExtResource("2_d6bsw")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_ffr4w")]
+visible = false
+
+[node name="GameOverMenu" parent="." instance=ExtResource("5_jv4r6")]
+visible = false
+
+[node name="WinMenu" parent="." instance=ExtResource("6_ytly0")]
+visible = false

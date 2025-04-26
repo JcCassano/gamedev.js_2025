@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c481gvvas5wdc"]
+
+[ext_resource type="Script" path="res://scenes/ui/clean_bar.gd" id="1_3xwkh"]
+[ext_resource type="Texture2D" uid="uid://bv7mgogr5xiwy" path="res://scenes/ui/Clean_Over100px.png" id="2_g67hw"]
+[ext_resource type="Texture2D" uid="uid://c6f42lhnx6ifv" path="res://scenes/ui/Clean_Progress100px.png" id="3_nrbyd"]
+
+[node name="CleanBar" type="Node"]
+script = ExtResource("1_3xwkh")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+z_index = 10
+texture_filter = 1
+clip_contents = true
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 117.0
+offset_bottom = 39.0
+scale = Vector2(1.16, 1)
+rounded = true
+texture_over = ExtResource("2_g67hw")
+texture_progress = ExtResource("3_nrbyd")

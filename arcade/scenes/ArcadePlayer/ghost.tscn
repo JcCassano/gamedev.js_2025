@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbhax4e1evv2e"]
+
+[ext_resource type="Texture2D" uid="uid://goocwxrqyjat" path="res://art/staff_walk.png" id="1_21dlp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc3n0"]
+atlas = ExtResource("1_21dlp")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p5h55"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc3n0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ghost" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p5h55")

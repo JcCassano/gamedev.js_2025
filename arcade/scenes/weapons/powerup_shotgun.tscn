@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://8qmsqf2x08cl"]
+
+[ext_resource type="Script" path="res://arcade/scenes/weapons/powerup_shotgun.gd" id="1_ks205"]
+[ext_resource type="Texture2D" uid="uid://bhftu871823pc" path="res://art/bulletPickup.png" id="1_omwa5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4564"]
+size = Vector2(39, 20)
+
+[node name="PowerupShotgun" type="Area2D"]
+scale = Vector2(0.3, 0.3)
+collision_layer = 128
+script = ExtResource("1_ks205")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.422411, 0.422411)
+texture = ExtResource("1_omwa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_u4564")

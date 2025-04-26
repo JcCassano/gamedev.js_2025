@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://cr8kmbcbpsukp"]
+
+[ext_resource type="Texture2D" uid="uid://dknghbim7dbgj" path="res://art/player.png" id="1_2xydm"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_6usas"]
+[ext_resource type="PackedScene" uid="uid://cjahsfn5pmg6r" path="res://components/velocity_component.tscn" id="3_n8c81"]
+[ext_resource type="PackedScene" uid="uid://s7nhql0aqqds" path="res://components/FSM/fsm.tscn" id="4_btk7j"]
+[ext_resource type="PackedScene" uid="uid://dujfaf0edrs5f" path="res://components/squash_stretch_component.tscn" id="5_6suhy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhdnp"]
+size = Vector2(12.1429, 7.89281)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "squash_node") groups=["player"]]
+collision_mask = 4
+script = ExtResource("1_6usas")
+velocity_component = NodePath("VelocityComponent")
+squash_node = NodePath("SquashStretchComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_2xydm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.357143, 10.375)
+shape = SubResource("RectangleShape2D_fhdnp")
+
+[node name="FSM" parent="." instance=ExtResource("4_btk7j")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_n8c81")]
+
+[node name="SquashStretchComponent" parent="." instance=ExtResource("5_6suhy")]
+
+[node name="Visual" type="Node2D" parent="."]
